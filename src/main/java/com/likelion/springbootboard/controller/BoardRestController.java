@@ -23,10 +23,8 @@ public class BoardRestController {
         return boardService.getArticle(id);
     }
 
-    // 추가는 된다. 하지만 아이디는 자동 생성 하고싶은데 아이디를 입력 해줘야만 글이 생성 된다.
-    // 이걸 홈페이지로 적용을 어떻게 시킬까?
     @PostMapping("")
-    public BoardResponse create(@RequestBody BoardRequest boardRequest) {
+    public Long create(@RequestBody BoardRequest boardRequest) {
         return boardService.add(boardRequest);
     }
 
@@ -35,9 +33,17 @@ public class BoardRestController {
         return boardService.findAll();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{id}/delete")
     public ResponseEntity<String> deleteById(@PathVariable("id") Long id) {
         boardService.deleteById(id);
         return ResponseEntity.ok().body("삭제가 완료 되었습니다");
     }
+
+    @PatchMapping("/{id}/edit")
+    public ResponseEntity<String> editBoard(@PathVariable("id") Long id, @RequestBody BoardRequest dto) {
+        boardService.editBoard(id, dto);
+        return ResponseEntity.ok().body("수정 완료.");
+
+    }
+
 }

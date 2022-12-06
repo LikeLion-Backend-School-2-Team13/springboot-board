@@ -3,7 +3,6 @@ POST http://localhost:8080/api/v1/boards
 Content-Type: application/json
 
 {
-  "id": 2,
   "title": "제목1",
   "content": "내용내용",
   "author": "우주완"
@@ -16,4 +15,14 @@ GET http://localhost:8080/api/v1/boards/list
 GET http://localhost:8080/api/v1/boards/2
 
 ###
-DELETE http://localhost:8080/api/v1/boards/3
+DELETE http://localhost:8080/api/v1/boards/4/delete
+
+###
+PATCH http://localhost:8080/api/v1/boards/2/edit
+Content-Type: application/json
+
+{
+  "title": "수정",
+  "content": "내용내용수정수333",
+  "author": "우주인"
+}
