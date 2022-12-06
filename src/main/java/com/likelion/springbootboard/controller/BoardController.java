@@ -1,7 +1,7 @@
 package com.likelion.springbootboard.controller;
 
-import com.likelion.springbootboard.entity.Article;
-import com.likelion.springbootboard.repository.ArticleRepository;
+import com.likelion.springbootboard.entity.Board;
+import com.likelion.springbootboard.repository.BoardRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,12 +13,12 @@ import java.util.List;
 @Controller
 @RequestMapping("")
 @Slf4j
-public class ArticleController {
+public class BoardController {
 
-    private final ArticleRepository articleRepository;
+    private final BoardRepository boardRepository;
 
-    public ArticleController(ArticleRepository articleRepository) {
-        this.articleRepository = articleRepository;
+    public BoardController(BoardRepository articleRepository) {
+        this.boardRepository = articleRepository;
     }
 
 
@@ -34,7 +34,7 @@ public class ArticleController {
 
     @GetMapping("/boards")
     public String List(Model model) {
-        List<Article> articles = articleRepository.findAll();
+        List<Board> articles = boardRepository.findAll();
         model.addAttribute("articles", articles);
         return "list";
     }
