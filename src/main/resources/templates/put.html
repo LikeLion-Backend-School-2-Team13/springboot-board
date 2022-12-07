@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>수정페이지</title>
+</head>
+<style>
+  .list-w {
+    /*text-align: center;*/
+    margin-left: 30% ;
+  }
+  .list-w > form > input{
+    width: 35%;
+    height: 35px;
+  }
+  .list-w > form> textarea{
+    width: 50%;
+    height: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+</style>
+
+
+<body>
+
+<div class = "list-w">
+  <h1>수정페이지</h1>
+  <form th:action="@{/api/v1/boards/update/{id}(id=${board.id})}" method="post">
+    <input name="title" type="text" th:value="${board.title}">
+    <br>
+    <textarea name="contents" th:text="${board.contents}"></textarea>
+    <br>
+    <button type="submit">수정완료</button>
+  </form>
+</div>
+
+</body>
+</html>

@@ -8,5 +8,20 @@
 <!--#adddtribute에 name칸에있는 변수명 쓰기-->
 <h1 th:text="${view.title}">제목</h1>
 <p th:text="${view.contents}">내용</p>
+
+<div style="float:left">
+<form th:action="@{/api/v1/boards/{id}(id=${view.id})}", th:method="put">
+<button>수정</button>
+</form>
+</div>
+
+<div style="margin-left: 10px;float: left" >
+<form th:action="@{/api/v1/boards/{id}(id=${view.id})}", th:method="delete">
+    <button>삭제</button>
+</form>
+</div>
+
+
+
 </body>
 </html>

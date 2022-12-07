@@ -25,7 +25,11 @@
             <tr th:each="bbb : ${list}">
                 <td th:text="${bbb.id}"></td>
                 <td>
+<!--                            @PathVariable 방식-->
                     <a th:text="${bbb.title}" th:href="@{/api/v1/boards/{id}(id=${bbb.id})}"></a>
+
+<!--                    @GET방식-->
+<!--                    <a th:text="${bbb.title}" th:href="@{/api/v1/boards/(id=${bbb.id})}"></a>-->
                 </td>
             </tr>
             </tbody>

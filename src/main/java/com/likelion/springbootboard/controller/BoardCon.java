@@ -34,8 +34,8 @@ public class BoardCon {
 //        model.addAttribute("view",boardSer.boardView(id));
 //        return "view";
 //    }
-    //v2 pathvariable GET /api/v1/boards/{id}
-        @GetMapping("/{id}") //view/1
+    //v2 pathvariable                   GET /api/v1/boards/{id}
+        @GetMapping("/{id}") // api/v1/boards/1
     public String boardView(@PathVariable Long id,Model model){
         model.addAttribute("view",boardSer.boardView(id));
         return "view";
@@ -46,9 +46,13 @@ public class BoardCon {
     public String write(){
         return "write";
     }
+    @GetMapping("/write")
+    public String write1(){
+        return "write";
+    }
 
     //개시글 등록 POST /api/v1/boards
-    @PostMapping("")
+    @PostMapping("")               // POST   /api/v1/boards
     public String showWrite(/*String title, String contents*/Board board){
 
         //v1(write연동전)
@@ -61,13 +65,37 @@ public class BoardCon {
 
         ///v2 write에서 제목 내용 쓴거 db에 저장
         boardSer.boardWrite(board);
-        return "";
+        return "redirect:/api/v1/boards/list";
     }
-
-    @DeleteMapping("/{id}")
+            //삭제
+    @DeleteMapping("/{id}") //           delete    /api/v1/boards/1
     public String boardDel(@PathVariable Long id){
         boardRepo.deleteById(id);
-        return "redirect:/api/v1/list";
+        return "redirect:/api/v1/boards/list";
+    }
+
+
+            //수정페이지
+    @PutMapping("/{id}")
+    public String boardPut(@PathVariable Long id, Model model){
+
+        model.addAttribute("board",boardSer.boardView(id));
+
+        return "put";
+    }
+
+    //수정 post
+    @PostMapping("/update/{id}")
+    public String boardsUpdate(@PathVariable Long id,Board board){
+        Board boardTem=boardSer.boardView(id);
+
+        boardTem.setTitle(board.getTitle());
+        boardTem.setContents(board.getContents());
+
+        boardSer.boardWrite(boardTem);
+
+        return "redirect:/api/v1/boards/list";
+
     }
 
 }
