@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,6 +22,9 @@ public class Board {
     private String title;
     private String content;
     private String author;
+
+//    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+//    private List<Review> reviews;
 
     public void update(String title, String content, String author) {
         this.title = title;

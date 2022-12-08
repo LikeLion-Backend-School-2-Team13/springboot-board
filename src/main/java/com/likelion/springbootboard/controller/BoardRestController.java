@@ -24,7 +24,7 @@ public class BoardRestController {
     }
 
     @PostMapping("")
-    public Long create(@RequestBody BoardRequest boardRequest) {
+    public BoardResponse create(@RequestBody BoardRequest boardRequest) {
         return boardService.add(boardRequest);
     }
 
@@ -33,15 +33,17 @@ public class BoardRestController {
         return boardService.findAll();
     }
 
-    @DeleteMapping("/{id}/delete")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteById(@PathVariable("id") Long id) {
         boardService.deleteById(id);
         return ResponseEntity.ok().body("삭제가 완료 되었습니다");
     }
 
-    @PatchMapping("/{id}/edit")
+    @PutMapping("/{id}")
+//    public BoardResponse editBoard(@PathVariable("id") Long id, @RequestBody BoardRequest dto) {
     public ResponseEntity<String> editBoard(@PathVariable("id") Long id, @RequestBody BoardRequest dto) {
         boardService.editBoard(id, dto);
+//        return BoardResponse.of(board);
         return ResponseEntity.ok().body("수정 완료.");
 
     }

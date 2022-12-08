@@ -27,8 +27,9 @@ public class BoardService {
 
 
     // 게시물 저장
-    public Long add(BoardRequest boardRequest) {
-        return boardRepository.save(boardRequest.toBoard()).getId();
+    public BoardResponse add(BoardRequest boardRequest) {
+        Board board = boardRepository.save(boardRequest.toBoard());
+        return BoardResponse.of(board);
     }
 
     // 게시물 리스트
