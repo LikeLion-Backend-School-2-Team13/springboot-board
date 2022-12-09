@@ -11,6 +11,9 @@ import com.likelion.springbootboard.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class ReviewService {
@@ -23,6 +26,15 @@ public class ReviewService {
         Review review = reviewRepository.save(reviewRequest.toEntity(board));
         return ReviewResponse.of(review);
     }
+    public ReviewResponse findById(Long id) {
+        Review review = reviewRepository.findById(id).orElseThrow(()-> new BoardException(ErrorCode.NOT_FOUND,"아이디를 찾을 수 없습니다."));
+        return ReviewResponse.of(review);
+    }
 
-
+    // List<Response> 로 바꿀수는 없을까?
+    public List<Review> findAll(Long boardId) {
+        Board board = boardRepository.findById(boardId).orElseThrow(()-> new BoardException(ErrorCode.NOT_FOUND,"해당 아이디 존재 하지 않습니다."));
+        List<Review> review = reviewRepository.findByBoard(board);
+        return review;
+    }
 }
