@@ -5,6 +5,7 @@ import com.likelion.springbootboard.entity.dto.ReviewRequest;
 import com.likelion.springbootboard.entity.dto.ReviewResponse;
 import com.likelion.springbootboard.service.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,5 +31,14 @@ public class ReviewRestController {
         return  reviewService.findById(id);
     }
 
+    @PutMapping("/reviews/{id}")
+    public ReviewResponse edit(@PathVariable("id") Long id,@RequestBody ReviewRequest dto) {
+        return reviewService.edit(id, dto);
+    }
 
+    @DeleteMapping("/reviews/{id}")
+    public ResponseEntity<String> deleteById(@PathVariable("id") Long id) {
+        reviewService.deleteById(id);
+        return ResponseEntity.ok().body("리뷰 삭제가 완료 되었습니다"); //
+    }
 }

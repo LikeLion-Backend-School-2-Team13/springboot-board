@@ -10,6 +10,7 @@ import com.likelion.springbootboard.repository.BoardRepository;
 import com.likelion.springbootboard.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,5 +37,16 @@ public class ReviewService {
         Board board = boardRepository.findById(boardId).orElseThrow(()-> new BoardException(ErrorCode.NOT_FOUND,"해당 아이디 존재 하지 않습니다."));
         List<Review> review = reviewRepository.findByBoard(board);
         return review;
+    }
+
+    @Transactional
+    public ReviewResponse edit(Long id, ReviewRequest reviewRequest) {
+        Review review = reviewRepository.findById(id).orElseThrow(()-> new BoardException(ErrorCode.NOT_FOUND,"에러"));
+        review.update(reviewRequest.getContent(), reviewRequest.getAuthor());
+        return ReviewResponse.of(review);
+    }
+
+    public void deleteById(Long id) {
+        reviewRepository.deleteById(id);
     }
 }
