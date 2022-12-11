@@ -25,9 +25,19 @@ public class Review {
     @JoinColumn(name = "board_id")
     private Board board;
 
+    public void update(Review review) {
+        updateContent(review.getContent());
+        updateAuthor(review.getAuthor());
+    }
 
-    public void update(String content, String author) {
-        this.content =content;
-        this.author = author;
+    private void updateContent(String content) {
+        if (content != null) {
+            this.content = content;
+        }
+    }
+    private void updateAuthor(String author) {
+        if (author != null) {
+            this.author = author;
+        }
     }
 }

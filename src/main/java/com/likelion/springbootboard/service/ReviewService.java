@@ -40,9 +40,9 @@ public class ReviewService {
     }
 
     @Transactional
-    public ReviewResponse edit(Long id, ReviewRequest reviewRequest) {
+    public ReviewResponse editReview(Long id, ReviewRequest dto) {
         Review review = reviewRepository.findById(id).orElseThrow(()-> new BoardException(ErrorCode.NOT_FOUND,"에러"));
-        review.update(reviewRequest.getContent(), reviewRequest.getAuthor());
+        review.update(dto.toEntity());
         return ReviewResponse.of(review);
     }
 

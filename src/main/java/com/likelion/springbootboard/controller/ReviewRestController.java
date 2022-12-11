@@ -31,9 +31,9 @@ public class ReviewRestController {
         return  reviewService.findById(id);
     }
 
-    @PutMapping("/reviews/{id}")
+    @PatchMapping("/reviews/{id}")
     public ReviewResponse edit(@PathVariable("id") Long id,@RequestBody ReviewRequest dto) {
-        return reviewService.edit(id, dto);
+        return reviewService.editReview(id, dto);
     }
 
     @DeleteMapping("/reviews/{id}")

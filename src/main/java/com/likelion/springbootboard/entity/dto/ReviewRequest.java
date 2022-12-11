@@ -18,4 +18,11 @@ public class ReviewRequest {
                 .build();
 
     }
+    public Review toEntity() {
+        return Review.builder()
+                .content(content)
+                .author(author)
+                .build();
+
+    }
 }
