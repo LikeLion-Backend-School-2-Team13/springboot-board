@@ -49,7 +49,7 @@ public class BoardService {
     @Transactional
     public BoardResponse editBoard(Long id, BoardRequest dto) {
         Board board = boardRepository.findById(id).orElseThrow(()-> new BoardException(ErrorCode.NOT_FOUND, "해당 id : "+id+" 가 존재하지 않습니다. "));
-        board.update(dto.getTitle(), dto.getContent(), dto.getAuthor());
+        board.update(dto.toBoard());
         return BoardResponse.of(board);
     }
 

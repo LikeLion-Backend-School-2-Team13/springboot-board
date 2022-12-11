@@ -26,10 +26,27 @@ public class Board {
 //    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
 //    private List<Review> reviews;
 
-    public void update(String title, String content, String author) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
+    public void update(Board board) {
+        updateTitle(board.getTitle());
+        updateContent(board.getContent());
+        updateAuthor(board.getAuthor());
+    }
+
+    private void updateTitle(String title) {
+        if (title != null) {
+            this.title = title;
+        }
+    }
+
+    private void updateContent(String content) {
+        if (content != null) {
+            this.content = content;
+        }
+    }
+    private void updateAuthor(String author) {
+        if (author != null) {
+            this.author = author;
+        }
     }
 
 }

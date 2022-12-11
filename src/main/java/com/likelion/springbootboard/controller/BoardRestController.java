@@ -39,13 +39,13 @@ public class BoardRestController {
         return ResponseEntity.ok().body("삭제가 완료 되었습니다");
     }
 
-    @PutMapping("/{id}")
+    @PatchMapping("/{id}")
 //    public BoardResponse editBoard(@PathVariable("id") Long id, @RequestBody BoardRequest dto) {
-    public ResponseEntity<String> editBoard(@PathVariable("id") Long id, @RequestBody BoardRequest dto) {
-        boardService.editBoard(id, dto);
+    public BoardResponse editBoard(@PathVariable("id") Long id, @RequestBody BoardRequest dto) {
+//        boardService.editBoard(id, dto);
 //        return BoardResponse.of(board);
-        return ResponseEntity.ok().body("수정 완료.");
-
+//        return ResponseEntity.ok().body("수정 완료.");
+        return boardService.editBoard(id, dto);
     }
 
 }
