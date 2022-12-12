@@ -34,6 +34,21 @@
             </tr>
             </tbody>
         </table>
+
+        <th:block th:each="listpage : ${#numbers.sequence(startPage,endPage)}">
+            <a th:if="${listpage != page}" th:href="@{/api/v1/boards/list(page=${listpage -1},keyword=${param.keyword})}" th:text="${listpage}"></a>
+            <strong th:if="${listpage == page}" th:text="${listpage}" style="color : #f67e7e"></strong>
+        </th:block>
+<!--        http://localhost:8080/api/v1/boards/list?keyword=8-->
+<!--        http://localhost:8080/api/v1/boards/api/v1/boards/list/?keyword=9-->
+        <form th:method="get">
+            <input type="text" name="keyword">
+            <button type="submit">검색</button>
+        </form>
+
+        <form th:action="@{/api/v1/boards/}" th:method="get">
+            <button type="submit">글작성</button>
+        </form>
     </div>
 </body>
 </html>

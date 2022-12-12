@@ -32,6 +32,10 @@
         <br>
         <button type="submit">작성완료</button>
     </form>
+    <br>
+    <form th:action="@{/api/v1/boards/list}" th:method="get">
+        <button type="submit">작성취소</button>
+    </form>
 </div>
 
 </body>
