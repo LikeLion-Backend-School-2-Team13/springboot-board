@@ -18,11 +18,60 @@ GET http://localhost:8080/api/v1/boards/2
 DELETE http://localhost:8080/api/v1/boards/4/delete
 
 ###
-PATCH http://localhost:8080/api/v1/boards/2/edit
+PATCH http://localhost:8080/api/v1/boards/2
 Content-Type: application/json
 
 {
-  "title": "수정",
   "content": "내용내용수정수333",
   "author": "우주인"
+}
+
+###
+POST http://localhost:8080/api/v1/boards/1/reviews
+Content-Type: application/json
+
+{
+  "content": "리뷰리뷰",
+  "author": "우주완"
+}
+
+
+###
+GET http://localhost:8080/api/v1/boards/1/reviews
+
+
+
+###
+GET http://localhost:8080/api/v1/reviews/1
+
+###
+GET http://localhost:8080/api/v1/reviews/2
+
+###
+PUT http://localhost:8080/api/v1/reviews/2
+Content-Type: application/json
+
+{
+  "content": "리뷰 수정",
+  "author": "리수정"
+}
+
+###
+DELETE http://localhost:8080/api/v1/reviews/3
+
+
+###
+PATCH http://localhost:8080/api/v1/reviews/1
+Content-Type: application/json
+
+{
+  "content": "리뷰 수정"
+}
+
+###
+PATCH http://localhost:8080/api/v1/reviews/4
+Content-Type: application/json
+
+{
+  "author": "리수정"
 }

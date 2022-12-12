@@ -6,36 +6,28 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Getter
-@Table(name = "board_space")
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class Board {
+@AllArgsConstructor
+@Getter
+public class Review {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String title;
     private String content;
     private String author;
 
-//    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
-//    private List<Review> reviews;
+    @ManyToOne
+//    @JoinColumn(name = "id") // error 가 뜬다
+    @JoinColumn(name = "board_id")
+    private Board board;
 
-    public void update(Board board) {
-        updateTitle(board.getTitle());
-        updateContent(board.getContent());
-        updateAuthor(board.getAuthor());
-    }
-
-    private void updateTitle(String title) {
-        if (title != null) {
-            this.title = title;
-        }
+    public void update(Review review) {
+        updateContent(review.getContent());
+        updateAuthor(review.getAuthor());
     }
 
     private void updateContent(String content) {
@@ -48,5 +40,4 @@ public class Board {
             this.author = author;
         }
     }
-
 }

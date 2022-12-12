@@ -27,8 +27,9 @@ public class BoardService {
 
 
     // 게시물 저장
-    public Long add(BoardRequest boardRequest) {
-        return boardRepository.save(boardRequest.toBoard()).getId();
+    public BoardResponse add(BoardRequest boardRequest) {
+        Board board = boardRepository.save(boardRequest.toBoard());
+        return BoardResponse.of(board);
     }
 
     // 게시물 리스트
@@ -42,11 +43,16 @@ public class BoardService {
         boardRepository.deleteById(id);
     }
 
+
+    // save 가 없는데 DB에 저장 되는 이유는 뭘까
+    // @Transactional 붙혔더니 save 가 되었다.
     @Transactional
     public BoardResponse editBoard(Long id, BoardRequest dto) {
         Board board = boardRepository.findById(id).orElseThrow(()-> new BoardException(ErrorCode.NOT_FOUND, "해당 id : "+id+" 가 존재하지 않습니다. "));
-        board.update(dto.getTitle(), dto.getContent(), dto.getAuthor());
+        board.update(dto.toBoard());
         return BoardResponse.of(board);
     }
+
+
 
 }
