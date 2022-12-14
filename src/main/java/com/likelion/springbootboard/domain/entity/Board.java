@@ -1,5 +1,6 @@
 package com.likelion.springbootboard.domain.entity;
 
+import com.sun.istack.NotNull;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,4 +16,5 @@ public class Board {
     private Long id;
     private String title;
     private String contents;
+
 }

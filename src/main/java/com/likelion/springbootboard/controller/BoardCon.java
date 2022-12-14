@@ -2,7 +2,6 @@ package com.likelion.springbootboard.controller;
 
 
 import com.likelion.springbootboard.domain.entity.Board;
-import com.likelion.springbootboard.repo.BoardRepo;
 import com.likelion.springbootboard.ser.BoardSer;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,13 +22,11 @@ public class BoardCon {
     }
 
     //리스트페이지
-    //v2 페이징처리
     //v3 검색기능
     @GetMapping("/list")
     public String boardList(Model model,
                             @PageableDefault(page = 0,size = 10,sort = "id",direction= Sort.Direction.DESC) Pageable pageable,
                             String keyword) {
-
         Page<Board> list;
 
         if(keyword==null){
@@ -37,8 +34,6 @@ public class BoardCon {
         }else {
             list = boardSer.searchList(keyword,pageable);
         }
-
-
 
         int page=list.getPageable().getPageNumber()+1; //현재페이지 0부터시작
         int startPage=Math.max(page-4,1); //앞 페이지
